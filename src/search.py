@@ -1,4 +1,6 @@
 import sys
+import random
+import itertools
 import cv2 as cv
 import numpy as np
 from main import MAP_FILE
@@ -17,7 +19,7 @@ class Search():
             sys.exit(1)
 
         self.area_actual = 0
-        self.sailor_actual = (0, 0)  # As "local" coords within search area
+        self.sailor_actual = [0, 0]  # As "local" coords within search area
 
         self.sa1 = self.img[SA1_CORNERS[1]:SA1_CORNERS[3],
                             SA1_CORNERS[0]:SA1_CORNERS[2]]
@@ -73,8 +75,8 @@ class Search():
     def sailor_final_location(self, num_search_areas):
         """Return the actual x,y location of the missing sailor."""
         # Find the sailor coordinates with respect to any Search Area subarray.
-        self.sailor_actual[0] = np.random.choice(self.sa1.share[1], 1)
-        self.sailor_actual[1] = np.random.choice(self.sa1.share[0], 1)
+        self.sailor_actual[0] = np.random.choice(self.sa1.shape[1], 1)
+        self.sailor_actual[1] = np.random.choice(self.sa1.shape[0], 1)
 
         area = int(random.triangular(1, num_search_areas + 1))
 
@@ -83,12 +85,12 @@ class Search():
             y = self.sailor_actual[1] + SA1_CORNERS[1]
             self.area_actual = 1
         elif area == 2:
-            x = self.sailor_acutual[0] + SA2_CORNERS[0]
-            y = self.sailor_acutual[1] + SA2_CORNERS[1]
+            x = self.sailor_actual[0] + SA2_CORNERS[0]
+            y = self.sailor_actual[1] + SA2_CORNERS[1]
             self.area_actual = 2
         elif area == 3:
-            x = self.sailor_acutual[0] + SA3_CORNERS[0]
-            y = self.sailor_acutual[1] + SA3_CORNERS[1]
+            x = self.sailor_actual[0] + SA3_CORNERS[0]
+            y = self.sailor_actual[1] + SA3_CORNERS[1]
             self.area_actual = 3
         return x, y
 

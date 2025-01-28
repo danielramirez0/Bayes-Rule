@@ -72,6 +72,12 @@ class Search():
         cv.moveWindow('Search Area', 750, 10)
         cv.waitKey(500)
 
+    def draw_found(self, x, y):
+        """Display circle at found location."""
+        cv.circle(self.img, (x,y), 3, (255, 0, 0), -1)
+        cv.imshow("Search Area", self.img)
+        cv.waitKey(1500)
+
     def sailor_final_location(self, num_search_areas):
         """Return the actual x,y location of the missing sailor."""
         # Find the sailor coordinates with respect to any Search Area subarray.

@@ -87,5 +87,20 @@ def main():
             print("\nSorry, but that isn't a valid choice.", file=sys.stderr)
             continue
 
+        app.revise_target_probs()
+
+        print("\nSearch {} Results 1 = {}".format(search_num, results_1), file=sys.stderr)
+        print("\nSearch {} Results 2 = {}".format(search_num, results_2), file=sys.stderr)
+        print("Search {} Effectiveness (E):".format(search_num))
+        print("E1 = {:.3f}, E2 = {:.3f}, E3 = {:.3f}".format(app.sep1, app.sep2, app.sep3))
+
+        if results_1 == "Not Found" and results_2 == "Not Found":
+            print("\nNew Target Probabilities (P) for Search {}:".format(search_num + 1 ))
+            print("P1 = {:.3f}, P2 = {:.3f}, P3 = {:.3f}".format(app.p1, app.p2, app.p3))
+        else:
+            app.draw_found(sailor_x[0], sailor_y[0])
+            main()
+        search_num += 1
+
 if __name__ == "__main__":
     main()

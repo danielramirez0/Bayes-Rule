@@ -23,3 +23,9 @@ Solution for a Search and Rescue sample project. Uses Bayes' rule to find a soli
 ## Objective
 
 Create a search and rescue app that uses Baye's rule to inform player choices on how to conduct a search.
+
+## TODO
+
+Smarter Searches
+Implement Monte Carlo Simulation
+Calculate the Probability of Detection
